@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     public float speed;
 
     public Text score;
+
+     public GameObject wintextObject;
 
     private int scoreValue = 0;
 
@@ -25,6 +29,21 @@ public class PlayerScript : MonoBehaviour
         float hozMovement = Input.GetAxis("Horizontal");
         float vertMovement = Input.GetAxis("Vertical");
         rd2d.AddForce(new Vector2(hozMovement * speed, vertMovement * speed));
+
+        if(scoreValue >= 6)
+        {
+            wintextObject.SetActive(true);
+        }
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
